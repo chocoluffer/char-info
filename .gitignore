@@ -1,0 +1,14 @@
+node_modules/
+.expo/
+npm-debug.*
+
+constants.js
+
+.idea/
+android/
+ios/
+.expo-source/
+projectFilesBackup/
+
+**/.DS_Store
+.DS_Store

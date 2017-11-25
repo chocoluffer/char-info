@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "name": "Character Info",
+    "slug": "char-info",
+    "privacy": "unlisted",
+    "orientation": "portrait",
+    "sdkVersion": "21.0.0"
+  }
+}
