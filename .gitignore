@@ -2,8 +2,6 @@ node_modules/
 .expo/
 npm-debug.*
 
-constants.js
-
 .idea/
 android/
 ios/
