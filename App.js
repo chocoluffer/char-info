@@ -8,6 +8,7 @@ import { createLogger } from 'redux-logger';
 import rootReducer from './src/reducers'
 
 // import StartUpNavigation from './src/util/startupNavigation'
+import { CharacterListContainer } from './src/features/'
 
 const loggerMiddleware = createLogger()
 
@@ -25,7 +26,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <Text>Testing</Text>
+          <CharacterListContainer />
         </View>
       </Provider>
     );

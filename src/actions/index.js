@@ -1,2 +1,1 @@
-export * from './customers.actions'
-export * from './store.actions'
+export * from './core.actions'

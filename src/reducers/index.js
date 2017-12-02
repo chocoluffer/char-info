@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux'
 
-import customers from './customers.reducer'
-import store from './store.reducer'
+import core from './core.reducer'
 
 const rootReducer = combineReducers({
-  customers,
-  store
+  core
 })
 
 export default rootReducer

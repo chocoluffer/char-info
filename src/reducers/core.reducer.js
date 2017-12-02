@@ -1,7 +1,7 @@
 import { CoreActions } from './../actions'
-const { INVALIDATE_CORE, FETCH_CHARACTERS_REQUEST, FETCH_CHARACTERS_SUCCESS, FETCH_CHARACTERS_FAILURE } = StoreActions.TYPES
+const { INVALIDATE_CORE, FETCH_CHARACTERS_REQUEST, FETCH_CHARACTERS_SUCCESS, FETCH_CHARACTERS_FAILURE } = CoreActions.TYPES
 
-export default function StoreReducer(
+export default function CoreReducer(
   state = {
     isFetching: false,
     didInvalidate: false,

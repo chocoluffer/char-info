@@ -1,16 +1,16 @@
-import gbFetch from './../util/gbFetch'
+import _PureApi from './../util/PureApiHandle'
 // import uuidv4 from 'uuid/v4'
 
 // import { RegisterActions } from './'
 
 const TYPES = {
-	INVALIDATE_CORE,
-	FETCH_CHARACTERS_REQUEST,
-	FETCH_CHARACTERS_SUCCESS,
-	FETCH_CHARACTERS_FAILURE
+	INVALIDATE_CORE: 'INVALIDATE_CORE',
+	FETCH_CHARACTERS_REQUEST: 'FETCH_CHARACTERS_REQUEST',
+	FETCH_CHARACTERS_SUCCESS: 'FETCH_CHARACTERS_SUCCESS',
+	FETCH_CHARACTERS_FAILURE: 'FETCH_CHARACTERS_FAILURE'
 }
 
-function invalidate() {
+function invalidateCore() {
 	return {
 		type: TYPES.INVALIDATE_CORE
 	}
@@ -26,7 +26,7 @@ function requestCore() {
 function receiveCore(json) {
   return {
     type: TYPES.FETCH_CHARACTERS_SUCCESS,
-    core: json,
+    list: json,
     receivedAt: Date.now()
   }
 }
@@ -38,9 +38,9 @@ function receiveCore(json) {
 // 	}
 // }
 
-export const CustomersActions = {
-	swapStatus: swapStatus,
-	setVerifiedAge: setVerifiedAge,
-	resetVerification: resetVerification,
+export const CoreActions = {
+	invalidateCore: invalidateCore,
+	requestCore: requestCore,
+	receiveCore: receiveCore,
 	TYPES: TYPES
 }

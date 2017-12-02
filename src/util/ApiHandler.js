@@ -2,10 +2,6 @@ import constants from './../../constants';
 
 const baseApi = 'https://us.api.battle.net/wow/';
 
-// function _formulateQuery(path) {
-// 	return baseApi + 
-// }
-
 export default function _handleApi(path, method, data, cb, parameter) {
 	const query = baseApi + path;
 	
