@@ -4,25 +4,23 @@ const baseApi = 'https://us.api.battle.net/wow/';
 
 export default function _PureApi(path, method = "GET", data) {
 
-  fetch(baseApi + path, {
+  return fetch(baseApi + path, {
     method: method,
     headers: {
       'X-Originating-Ip': '52.119.125.70', // TODO: Fetch current IP
     },
-    data: data,
+    data: data ? data : null,
   })
   .then(response => {
-     if(response.ok == false) {
-       let outcome = {
+    if(response.ok == true) {
+      return response.json()
+    } else {
+      let outcome = {
          "ok": response.ok,
          "status": response.status,
          "statusText": response.statusText
-       }
-       return outcome
-     } else {
-       return response.json()
-     }
+      }
+      return outcome
+    }
   })
 }
-
-// body: option.body ? JSON.stringify(option.body) : null,

@@ -1,8 +1,6 @@
 import _PureApi from './../util/PureApiHandle'
 // import uuidv4 from 'uuid/v4'
 
-// import { RegisterActions } from './'
-
 const TYPES = {
 	INVALIDATE_CORE: 'INVALIDATE_CORE',
 	FETCH_CHARACTERS_REQUEST: 'FETCH_CHARACTERS_REQUEST',
@@ -18,9 +16,14 @@ function invalidateCore() {
 
 function requestCore() {
 	return {
-		type: TYPES.FETCH_CHARACTERS_REQUEST,
-		isFetching: true
+		type: TYPES.FETCH_CHARACTERS_REQUEST
 	}
+}
+
+function filterCharacters(json) {
+	console.log('filter')
+	console.log(json.characters)
+	return json.characters
 }
 
 function receiveCore(json) {
@@ -31,16 +34,38 @@ function receiveCore(json) {
   }
 }
 
-// function fetchCore() {
-// 	return dispatch => {
-// 		dispatch(requestCore())
-// 		return gbFetch('')
-// 	}
-// }
+function fetchCore() {
+	return dispatch => {
+		dispatch(requestCore())
+		return _PureApi('user/characters?access_token=fdmymbtcbtadmqsyuqy5nzzd')
+		.then(json => {
+			const filteredCore = filterCharacters(json)
+			dispatch(receiveCore(filteredCore))
+		});
+	}
+}
+
+function shouldFetchCore(state) {
+	const core = state.core
+	if (!core) {
+		return true
+	} else if (core.isFetching) {
+		return false
+	} else {
+		return core.didInvalidate
+	}
+}
+
+function fetchCoreIfNeeded() {
+	return (dispatch, getState) => {
+		if(shouldFetchCore(getState())) {
+			return dispatch(fetchCore())
+		}
+	}
+}
 
 export const CoreActions = {
 	invalidateCore: invalidateCore,
-	requestCore: requestCore,
-	receiveCore: receiveCore,
+	fetchCoreIfNeeded: fetchCoreIfNeeded,
 	TYPES: TYPES
 }

@@ -14,12 +14,9 @@ const mapDispatchToProps = dispatch => {
     	invalidateCore: () => {
     		dispatch(CoreActions.invalidateCore())
     	},
-		requestCore: () => {
-			dispatch(CoreActions.requestCore())
-		},
-		receiveCore: (json) => {
-			dispatch(CoreActions.receiveCore(json))
-		}
+        fetchCore: () => {
+            dispatch(CoreActions.fetchCoreIfNeeded())
+        }
     }
 }
 

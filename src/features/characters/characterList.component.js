@@ -14,26 +14,10 @@ export default class CharacterList extends Component {
   	}
 
   	componentDidMount() {
-  		const { requestCore } = this.props
-
-  		requestCore()
-  		this._fetchCharacterList()
+  		const { invalidateCore, fetchCore } = this.props
+  		invalidateCore()
+  		fetchCore()
   	}
-
-	_fetchCharacterList = () => {
-		const path = 'user/characters?access_token=fdmymbtcbtadmqsyuqy5nzzd';
-
-		_handleApi(path, 'GET', null, this._filterCharacters, null)
-	}
-
-	_filterCharacters = (data, parameter) => {
-		const { receiveCore } = this.props
-		// console.log(data)
-		console.log('data.characters')
-		console.log(data.characters)
-
-		receiveCore(data.characters)
-	}
 
 	_test = (character) => {
 		console.log('toon touched')
