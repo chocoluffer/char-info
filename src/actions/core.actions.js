@@ -5,7 +5,8 @@ const TYPES = {
 	INVALIDATE_CORE: 'INVALIDATE_CORE',
 	FETCH_CHARACTERS_REQUEST: 'FETCH_CHARACTERS_REQUEST',
 	FETCH_CHARACTERS_SUCCESS: 'FETCH_CHARACTERS_SUCCESS',
-	FETCH_CHARACTERS_FAILURE: 'FETCH_CHARACTERS_FAILURE'
+	FETCH_CHARACTERS_FAILURE: 'FETCH_CHARACTERS_FAILURE',
+	DISPLAY_SPECIFIC_CHARACTER: 'DISPLAY_SPECIFIC_CHARACTER'
 }
 
 function invalidateCore() {
@@ -22,14 +23,21 @@ function requestCore() {
 
 function filterCharacters(json) {
 	console.log('filter')
-	console.log(json.characters)
-	return json.characters
+	let currentToons = [];
+	for(let i = 0; i < json.characters.length; i++) {
+		if(json.characters[i].lastModified != 0) {
+			currentToons.push(json.characters[i]);
+		}
+	}
+	// console.log(currentToons)
+	return currentToons
 }
 
-function receiveCore(json) {
+function receiveCore(rawList, filteredList) {
   return {
     type: TYPES.FETCH_CHARACTERS_SUCCESS,
-    list: json,
+    rawList: rawList,
+    processedList: filteredList,
     receivedAt: Date.now()
   }
 }
@@ -40,7 +48,7 @@ function fetchCore() {
 		return _PureApi('user/characters?access_token=fdmymbtcbtadmqsyuqy5nzzd')
 		.then(json => {
 			const filteredCore = filterCharacters(json)
-			dispatch(receiveCore(filteredCore))
+			dispatch(receiveCore(json.characters, filteredCore))
 		});
 	}
 }
@@ -64,8 +72,16 @@ function fetchCoreIfNeeded() {
 	}
 }
 
+function displaySpecific(character) {
+	return {
+		type: TYPES.DISPLAY_SPECIFIC_CHARACTER,
+		toon: character
+	}
+}
+
 export const CoreActions = {
 	invalidateCore: invalidateCore,
 	fetchCoreIfNeeded: fetchCoreIfNeeded,
+	displaySpecific: displaySpecific,
 	TYPES: TYPES
 }

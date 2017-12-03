@@ -7,6 +7,7 @@ import CoreActions from './../../actions/core.actions'
 import _handleApi from './../../util/ApiHandler'
 
 import CharacterSlot from './character-slot.component'
+import CharacterReport from './character-report.component'
 
 export default class CharacterList extends Component {
 	constructor(props) {
@@ -20,7 +21,13 @@ export default class CharacterList extends Component {
   	}
 
 	_test = (character) => {
-		console.log('toon touched')
+		const { displaySpecific } = this.props
+		displaySpecific(character)
+		console.log(character)
+	}
+
+	_test2 = () => {
+		console.log('wheeee')
 	}
 
 	_renderToon({item}) {
@@ -33,26 +40,31 @@ export default class CharacterList extends Component {
 	}
 
 	render() {
-		const { coreList, isFetching } = this.props
+		const { fullList, activeList, isFetching, displaySpecific } = this.props;
+		
+		// let holder = { "name": "placeholder", "realm": "placeholder" };
 
 		return (
 			<View style={styles.container}>
-				<Text>Testing</Text>
+				<Text>Low level toons may not be listed.{"\n"}If you would like to add them to visibility, provide their name and server.</Text>
 				<ActivityIndicator
 		        	display={isFetching ? 'flex' : 'none'}
 		          	size={100}
 		          	style={styles.spinner}
 		          	color={"orange"}
-		        />
+		        /> 
 				<FlatList 
-		          	data={coreList}
+		          	data={activeList}
 		          	keyExtractor={(item, index) => index}
 		          	renderItem={this._renderToon.bind(this)}
+		          	style={styles.list}
 		        />
 			</View>
 		);
 	}
 }
+
+ // <View display={displaySpecific.flag ? 'flex' : 'none'}>
 
 const styles = StyleSheet.create({
   container: {
@@ -64,9 +76,9 @@ const styles = StyleSheet.create({
   },
   list: {
   	width: '100%',
-    paddingTop: '2%',
+    // paddingTop: '2%',
     paddingHorizontal: '2%',
-    backgroundColor: '#9ea2a2'
+    // backgroundColor: '#9ea2a2'
   },
   item: {
   	width: '100%',

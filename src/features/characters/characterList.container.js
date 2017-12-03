@@ -5,7 +5,9 @@ import { CoreActions } from './../../actions'
 const mapStateToProps = state => {
     return {
         isFetching: state.core.isFetching,
-        coreList: state.core.coreList
+        fullList: state.core.fullList,
+        activeList: state.core.activeList,
+        displaySpecific: state.core.displaySpecific
     }
 }
 
@@ -16,6 +18,9 @@ const mapDispatchToProps = dispatch => {
     	},
         fetchCore: () => {
             dispatch(CoreActions.fetchCoreIfNeeded())
+        },
+        displaySpecific: (character) => {
+            dispatch(CoreActions.displaySpecific(character))
         }
     }
 }

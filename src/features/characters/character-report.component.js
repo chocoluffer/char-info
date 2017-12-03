@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, Text, TouchableNativeFeedback, StyleSheet } from 'react-native'
 
-export default class CharacterSlot extends Component {
+export default class CharacterReport extends Component {
   constructor(props) {
     super(props)
   }
@@ -13,6 +13,7 @@ export default class CharacterSlot extends Component {
     return (
       <TouchableNativeFeedback onPress={onClick}>
         <View style={styles.item}>
+          <Text>Character Information</Text>
           <Text>{character.name}</Text>
           <Text>{character.realm}</Text>
         </View>
@@ -23,12 +24,12 @@ export default class CharacterSlot extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: 'orange',
+    backgroundColor: 'blue',
     width: '100%',
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: '1%'
+    // marginTop: '1%'
     // marginRight: '2%',
     // marginBottom: '2%',
   }
